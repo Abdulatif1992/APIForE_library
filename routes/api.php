@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/booksid', 'App\Http\Controllers\ApiController@books');
+Route::post('/getbook/{book_id}', 'App\Http\Controllers\ApiController@getBook');
+Route::post('/getbooks/{booksIdList}', 'App\Http\Controllers\ApiController@getBooks');
+
+Route::get('/download/{filename}', 'App\Http\Controllers\ApiController@download');
+
