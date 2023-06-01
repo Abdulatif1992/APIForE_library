@@ -10,7 +10,7 @@ class ApiController extends Controller
 {
     public function books()
     {
-        $booksId = DB::table('books')->pluck('book_id');
+        $booksId = DB::table('books')->where('status', 1)->pluck('book_id');
         return $booksId;
     }
 
