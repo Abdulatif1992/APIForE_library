@@ -89,10 +89,13 @@ class BookController extends Controller
     {
         $zip = new ZipArchive();
         $archivePath = storage_path('app/'.$archivename.'.zip');
+        $password = 'sazagan_92';
 
         if ($zip->open($archivePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
-            $file = storage_path('app/uploads/'. $fileName);
+            $file = storage_path('app/uploads/'. $fileName);            
+            $zip->setPassword($password);
             $zip->addFile($file, $fileName);
+            $zip->setEncryptionName($fileName, ZipArchive::EM_AES_256);            
             $zip->close();
             return true;
             // Archive created successfully
@@ -120,6 +123,7 @@ class BookController extends Controller
     public function deletebook(Request $request)
     {
         DB::table('books')->where('book_id',$request->input('bookId'))->delete();
+        unlink(storage_path('app/'.$request->input('bookId').'.zip'));
         return redirect('dashboard');
     }
 }

@@ -16,13 +16,13 @@ class ApiController extends Controller
 
     public function getBook($book_id)
     {
-        $book = DB::table('books')->select('book_id','book_name', 'book_title', 'book_url', 'base64')->where('book_id', $book_id)->first();
+        $book = DB::table('books')->select('book_id','book_name', 'book_title', 'status', 'base64')->where('book_id', $book_id)->first();
         return $book;
     }
     
     public function getBooks($booksIdList)
     {
-        $books = DB::table('books')->select('book_id','book_name', 'book_title', 'book_url', 'base64')->whereIn('book_id', explode(',', $booksIdList))->get();
+        $books = DB::table('books')->select('book_id','book_name', 'book_title', 'status', 'base64')->whereIn('book_id', explode(',', $booksIdList))->get();
 
         return $books;
     }
